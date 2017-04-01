@@ -10,4 +10,9 @@ public class HelloServiceImpl implements HelloService.Iface{
     public String hello(String name) throws TException {
         return "hello " + name;
     }
+
+    @Override
+    public String baseInfo(String name, int age) throws TException {
+        return "your name:"+name+ ",age:"+age;
+    }
 }

@@ -1,13 +1,18 @@
 package com.yangyang.thrift.ttrhreadpoolserver;
 
 import com.yangyang.thrift.api.HelloService;
+import com.yangyang.thrift.api.UserService;
 import com.yangyang.thrift.service.HelloServiceImpl;
+import com.yangyang.thrift.service.UserServiceImpl;
 import org.apache.thrift.TException;
 import org.apache.thrift.TProcessor;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.server.TServer;
 import org.apache.thrift.server.TThreadPoolServer;
+import org.apache.thrift.transport.TFramedTransport;
 import org.apache.thrift.transport.TServerSocket;
+import org.apache.thrift.transport.TSocket;
+import org.apache.thrift.transport.TTransport;
 
 /**
  * Created by chenshunyang on 2016/10/31.
@@ -23,6 +28,7 @@ public class HelloTThreadPoolServer {
         //多线程服务模型
         TThreadPoolServer.Args tArgs = new TThreadPoolServer.Args(serverTransport);
         tArgs.processor(processor);
+        tArgs.transportFactory(new TFramedTransport.Factory());
         //客户端协议要一致
         tArgs.protocolFactory(new TBinaryProtocol.Factory());
 
